@@ -5,13 +5,22 @@ import java.util.List;
 /**
  * Created by pc on 20.06.2017.
  */
-public class Project {
+public class Projects {
     private int project_id;
     private String project_name;
-    private List<Developer> developerList;
+    private int cost;
+    private List<Developers> developerList;
 
-    public Project() {
+    public Projects() {
 
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
     }
 
     public int getProject_id() {
@@ -30,19 +39,20 @@ public class Project {
         this.project_name = project_name;
     }
 
-    public List<Developer> getDeveloperList() {
+    public List<Developers> getDeveloperList() {
         return developerList;
     }
 
-    public void setDeveloperList(List<Developer> developerList) {
+    public void setDeveloperList(List<Developers> developerList) {
         this.developerList = developerList;
     }
 
     @Override
     public String toString() {
-        return "Project{" +
+        return "Projects{" +
                 "project_id=" + project_id +
                 ", project_name='" + project_name + '\'' +
+                ", cost=" + cost +
                 ", developerList=" + developerList +
                 '}';
     }

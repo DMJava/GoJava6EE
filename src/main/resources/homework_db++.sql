@@ -103,7 +103,7 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `homework_db`.`projects_has_developers`
+-- Table `homework_db`.`Projects_has_developers`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `homework_db`.`projects_has_developers` ;
 

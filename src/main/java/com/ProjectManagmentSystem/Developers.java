@@ -5,13 +5,13 @@ import java.util.List;
 /**
  * Created by pc on 20.06.2017.
  */
-public class Developer {
+public class Developers {
     private int developer_id;
     private String developer_name;
     private int salary;
     private List<Skills> skillsList;
 
-    public Developer(){
+    public Developers(){
 
     }
 
@@ -49,7 +49,7 @@ public class Developer {
 
     @Override
     public String toString() {
-        return "Developer{" +
+        return "Developers{" +
                 "developer_id=" + developer_id +
                 ", developer_name='" + developer_name + '\'' +
                 ", salary=" + salary +

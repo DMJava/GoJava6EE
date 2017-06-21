@@ -1,7 +1,8 @@
 package com.ProjectManagmentSystem.DAO;
 
-import com.ProjectManagmentSystem.Developer;
+import com.ProjectManagmentSystem.Developers;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -9,17 +10,17 @@ import java.util.List;
  */
 public interface DeveloperDAO {
     //CREATE
-    void add(Developer developer);
+    void add(Developers developer) throws SQLException;
 
     //READ
-    List<Developer> getAll();
+    List<Developers> getAll() throws SQLException;
 
-    Developer getbyId(int developer_id);
+    Developers getbyId(int developer_id) throws SQLException;
 
     //UPDATE
-    void update(Developer developer);
+    void update(Developers developer) throws SQLException;
 
     //DELETE
-    void remove(Developer developer);
+    void remove(Developers developer) throws SQLException;
 
 }

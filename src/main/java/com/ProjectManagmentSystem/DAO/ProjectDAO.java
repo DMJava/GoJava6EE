@@ -1,7 +1,8 @@
 package com.ProjectManagmentSystem.DAO;
 
-import com.ProjectManagmentSystem.Project;
+import com.ProjectManagmentSystem.Projects;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -10,16 +11,16 @@ import java.util.List;
 public interface ProjectDAO {
 
     //CREATE
-    void add(Project project);
+    void add(Projects project) throws SQLException;
 
     //READ
-    List<Project> getAll();
+    List<Projects> getAll();
 
-    Project getbyId(int project_id);
+    Projects getbyId(int project_id);
 
     //UPDATE
-    void update(Project project);
+    void update(Projects project);
 
     //DELETE
-    void remove(Project project);
+    void remove(Projects project);
 }
