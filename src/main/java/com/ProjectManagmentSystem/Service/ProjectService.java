@@ -37,27 +37,57 @@ public class ProjectService extends UtilConnection implements ProjectDAO {
     }
 
     @Override
-    public List<Projects> getAll() {
+    public List<Projects> getAll() throws SQLException {
         List<Projects> projects = new ArrayList<>();
         String sql = "SELECT project_id, project_name, cost FROM projects";
         Statement statement = null;
         try {
             statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sql);
-            while (rs.next()){
-
+            while (rs.next()) {
+                Projects projects1 = new Projects();
+                projects1.setProject_id(rs.getInt("PROJECT_ID"));
+                projects1.setProject_name(rs.getString("PROJECT_NAME"));
+                projects1.setCost(rs.getInt("COST"));
+                projects.add(projects1);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
         }
-
         return projects;
     }
 
     @Override
-    public Projects getbyId(int project_id) {
-        return null;
+    public Projects getbyId(int project_id) throws SQLException {
+        PreparedStatement ps = null;
+        String sql = "SELECT PROJECT_ID, PROJECT_NAME, COST FROM projects WHERE PROJECT_ID=? ";
+        Projects projects = new Projects();
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, project_id);
+            ResultSet rs = ps.executeQuery();
+            projects.setProject_id(rs.getInt("PROJECT_ID") );
+            projects.setProject_name(rs.getString("PROJECT_NAME"));
+            projects.setCost(rs.getInt("COST"));
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (ps != null) {
+                ps.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        }
+        return projects;
     }
 
     @Override

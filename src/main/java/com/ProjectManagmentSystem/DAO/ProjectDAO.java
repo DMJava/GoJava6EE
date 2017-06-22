@@ -14,9 +14,9 @@ public interface ProjectDAO {
     void add(Projects project) throws SQLException;
 
     //READ
-    List<Projects> getAll();
+    List<Projects> getAll() throws SQLException;
 
-    Projects getbyId(int project_id);
+    Projects getbyId(int project_id) throws SQLException;
 
     //UPDATE
     void update(Projects project);

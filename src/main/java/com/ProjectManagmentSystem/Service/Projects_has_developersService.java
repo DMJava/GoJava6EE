@@ -15,17 +15,17 @@ public class Projects_has_developersService extends UtilConnection implements Pr
     private Connection connection = getConnection();
 
     @Override
-    public void add(Projects_has_developersDAO projects_has_developersDAO) {
+    public void add(Projects_has_developers projects_has_developers) {
 
     }
 
     @Override
-    public List<Projects_has_developersDAO> getAll() {
+    public List<Projects_has_developers> getAll() {
         return null;
     }
 
     @Override
-    public Projects_has_developersDAO getById(int projects_project_id, int developers_developer_id) throws SQLException {
+    public Projects_has_developers getById(int projects_project_id, int developers_developer_id) throws SQLException {
         PreparedStatement ps = null;
         String sql = "SELECT DEVELOPER_ID, PROJECT_ID FROM Projects_has_developers WHERE DEVELOPER_ID=? AND PROJECT_ID=?";
         Projects_has_developers pHd = new Projects_has_developers();
@@ -49,20 +49,22 @@ public class Projects_has_developersService extends UtilConnection implements Pr
                 connection.close();
             }
         }
-        return (Projects_has_developersDAO) pHd;
+        return pHd;
     }
 
     @Override
-    public void update(Projects_has_developersDAO projects_has_developersDAO) throws SQLException {
+    public void update(Projects_has_developers projects_has_developers) throws SQLException {
         PreparedStatement ps = null;
         String sql = "UPDATE Projects_has_developers SET DEVELOPER_ID=?, PROJECT_ID=?";
         try {
             ps = connection.prepareStatement(sql);
-            ps.setInt(1, projects_has_developersDAO);
+            ps.setInt(1, projects_has_developers.getDevelopers_developer_id());
+            ps.setInt(2, projects_has_developers.getProjects_project_id());
+            ps.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
-        }  finally {
+        } finally {
             if (ps != null) {
                 ps.close();
             }
@@ -73,7 +75,23 @@ public class Projects_has_developersService extends UtilConnection implements Pr
     }
 
     @Override
-    public void remove(Projects_has_developersDAO projects_has_developersDAO) {
-
+    public void remove(Projects_has_developers projects_has_developers) throws SQLException {
+        PreparedStatement ps = null;
+        String sql = "DELETE FROM Projects_has_developers WHERE PROJECT_ID =?, DEVELOPER_ID=? ";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, projects_has_developers.getProjects_project_id());
+            ps.setInt(2, projects_has_developers.getDevelopers_developer_id());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (ps != null) {
+                ps.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        }
     }
 }
