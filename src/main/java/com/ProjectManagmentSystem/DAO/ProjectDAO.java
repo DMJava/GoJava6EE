@@ -19,8 +19,8 @@ public interface ProjectDAO {
     Projects getbyId(int project_id) throws SQLException;
 
     //UPDATE
-    void update(Projects project);
+    void update(Projects project) throws SQLException;
 
     //DELETE
-    void remove(Projects project);
+    void remove(Projects project) throws SQLException;
 }

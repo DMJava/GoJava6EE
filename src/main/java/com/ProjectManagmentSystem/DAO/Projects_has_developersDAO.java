@@ -11,10 +11,10 @@ import java.util.List;
 public interface Projects_has_developersDAO {
 
     //CREATE
-    void add(Projects_has_developers projects_has_developers);
+    void add(Projects_has_developers projects_has_developers) throws SQLException;
 
     //READ
-    List<Projects_has_developers> getAll();
+    List<Projects_has_developers> getAll() throws SQLException;
 
     Projects_has_developers getById(int projects_project_id, int developers_developer_id) throws SQLException;
 

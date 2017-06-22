@@ -16,7 +16,7 @@ public class ProjectService extends UtilConnection implements ProjectDAO {
     public void add(Projects project) throws SQLException {
         PreparedStatement ps = null;
 
-        String sql = "INSERT INTO PROJECT (PROJECT_ID, PROJECT_NAME, COST) VALUES (?, ?, ?) ";
+        String sql = "INSERT INTO PROJECTS (PROJECT_ID, PROJECT_NAME, COST) VALUES (?, ?, ?) ";
         try {
             ps = connection.prepareStatement(sql);
             ps.setInt(1, project.getProject_id());
@@ -73,7 +73,7 @@ public class ProjectService extends UtilConnection implements ProjectDAO {
             ps = connection.prepareStatement(sql);
             ps.setInt(1, project_id);
             ResultSet rs = ps.executeQuery();
-            projects.setProject_id(rs.getInt("PROJECT_ID") );
+            projects.setProject_id(rs.getInt("PROJECT_ID"));
             projects.setProject_name(rs.getString("PROJECT_NAME"));
             projects.setCost(rs.getInt("COST"));
             ps.executeUpdate();
@@ -91,12 +91,43 @@ public class ProjectService extends UtilConnection implements ProjectDAO {
     }
 
     @Override
-    public void update(Projects project) {
-
+    public void update(Projects project) throws SQLException {
+        PreparedStatement ps = null;
+        String sql = "UPDATE projects SET PROJECT_NAME=?, COST=? WHERE PROJECT_ID=?";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, project.getProject_name());
+            ps.setInt(2, project.getCost());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (ps != null) {
+                ps.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        }
     }
 
     @Override
-    public void remove(Projects project) {
-
+    public void remove(Projects project) throws SQLException {
+        PreparedStatement ps = null;
+        String sql = "DELETE FROM projects WHERE PROJECT_ID=?";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, project.getProject_id());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (ps != null) {
+                ps.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        }
     }
 }
