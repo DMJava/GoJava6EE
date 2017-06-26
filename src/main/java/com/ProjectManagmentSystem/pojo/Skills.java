@@ -1,4 +1,4 @@
-package com.ProjectManagmentSystem;
+package com.ProjectManagmentSystem.pojo;
 
 /**
  * Created by pc on 20.06.2017.

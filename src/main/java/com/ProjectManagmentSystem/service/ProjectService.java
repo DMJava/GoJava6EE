@@ -1,29 +1,30 @@
-package com.ProjectManagmentSystem.Service;
+package com.ProjectManagmentSystem.service;
 
-import com.ProjectManagmentSystem.ConnectionToDb.UtilConnection;
-import com.ProjectManagmentSystem.DAO.DeveloperDAO;
-import com.ProjectManagmentSystem.Developers;
+import com.ProjectManagmentSystem.connectiontodb.UtilConnection;
+import com.ProjectManagmentSystem.dao.ProjectDAO;
+import com.ProjectManagmentSystem.pojo.Projects;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DeveloperService extends UtilConnection implements DeveloperDAO {
+public class ProjectService extends UtilConnection implements ProjectDAO {
 
-    Connection connection = getConnection();
+    private Connection connection = getConnection();
 
     @Override
-    public void add(Developers developer) throws SQLException {
+    public void add(Projects project) throws SQLException {
         PreparedStatement ps = null;
-        String sql = "INSERT INTO developers (DEVELOPER_ID, DEVELOPER_NAME, SALARY) VALUES (?, ?, ?)";
+
+        String sql = "INSERT INTO PROJECTS (PROJECT_ID, PROJECT_NAME, COST) VALUES (?, ?, ?) ";
         try {
             ps = connection.prepareStatement(sql);
-            ps.setInt(1, developer.getDeveloper_id());
-            ps.setString(2, developer.getDeveloper_name());
-            ps.setInt(3, developer.getSalary());
+            ps.setInt(1, project.getProject_id());
+            ps.setString(2, project.getProject_name());
+            ps.setInt(3, project.getCost());
             ps.executeUpdate();
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             if (ps != null) {
@@ -36,19 +37,19 @@ public class DeveloperService extends UtilConnection implements DeveloperDAO {
     }
 
     @Override
-    public List<Developers> getAll() throws SQLException {
-        List<Developers> developerList = new ArrayList<>();
-        String sql = "SELECT DEVELOPER_ID, DEVELOPER_NAME, SALARY FROM developers";
+    public List<Projects> getAll() throws SQLException {
+        List<Projects> projects = new ArrayList<>();
+        String sql = "SELECT project_id, project_name, cost FROM projects";
         Statement statement = null;
         try {
             statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
-                Developers developer = new Developers();
-                developer.setDeveloper_id(rs.getInt("DEVELOPER_ID"));
-                developer.setDeveloper_name(rs.getString("DEVELOPER_NAME"));
-                developer.setSalary(rs.getInt("SALARY"));
-                developerList.add(developer);
+                Projects projects1 = new Projects();
+                projects1.setProject_id(rs.getInt("PROJECT_ID"));
+                projects1.setProject_name(rs.getString("PROJECT_NAME"));
+                projects1.setCost(rs.getInt("COST"));
+                projects.add(projects1);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -60,23 +61,22 @@ public class DeveloperService extends UtilConnection implements DeveloperDAO {
                 connection.close();
             }
         }
-        return developerList;
+        return projects;
     }
 
     @Override
-    public Developers getbyId(int developer_id) throws SQLException {
+    public Projects getbyId(int project_id) throws SQLException {
         PreparedStatement ps = null;
-        String sql = "SELECT DEVELOPER_ID, DEVELOPER_NAME, SALARY FROM developers WHERE DEVELOPER_ID=?";
-        Developers developer = new Developers();
+        String sql = "SELECT PROJECT_ID, PROJECT_NAME, COST FROM projects WHERE PROJECT_ID=? ";
+        Projects projects = new Projects();
         try {
             ps = connection.prepareStatement(sql);
-            ps.setInt(1, developer_id);
+            ps.setInt(1, project_id);
             ResultSet rs = ps.executeQuery();
-            developer.setDeveloper_id(rs.getInt("DEVELOPER_ID"));
-            developer.setDeveloper_name(rs.getString("DEVELOPER_NAME"));
-            developer.setSalary(rs.getInt("SALARY"));
+            projects.setProject_id(rs.getInt("PROJECT_ID"));
+            projects.setProject_name(rs.getString("PROJECT_NAME"));
+            projects.setCost(rs.getInt("COST"));
             ps.executeUpdate();
-
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -87,19 +87,18 @@ public class DeveloperService extends UtilConnection implements DeveloperDAO {
                 connection.close();
             }
         }
-        return developer;
+        return projects;
     }
 
     @Override
-    public void update(Developers developer) throws SQLException {
+    public void update(Projects project) throws SQLException {
         PreparedStatement ps = null;
-        String sql = "UPDATE developers SET DEVELOPER_NAME=?, SALARY=? WHERE DEVELOPER_ID=?";
+        String sql = "UPDATE projects SET PROJECT_NAME=?, COST=? WHERE PROJECT_ID=?";
         try {
             ps = connection.prepareStatement(sql);
-            ps.setString(1, developer.getDeveloper_name());
-            ps.setInt(2, developer.getSalary());
+            ps.setString(1, project.getProject_name());
+            ps.setInt(2, project.getCost());
             ps.executeUpdate();
-
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -113,14 +112,13 @@ public class DeveloperService extends UtilConnection implements DeveloperDAO {
     }
 
     @Override
-    public void remove(Developers developer) throws SQLException {
+    public void remove(Projects project) throws SQLException {
         PreparedStatement ps = null;
-        String sql = "DELETE FROM developers WHERE DEVELOPER_ID=? ";
+        String sql = "DELETE FROM projects WHERE PROJECT_ID=?";
         try {
             ps = connection.prepareStatement(sql);
-            ps.setInt(1, developer.getDeveloper_id());
+            ps.setInt(1, project.getProject_id());
             ps.executeUpdate();
-
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

@@ -1,4 +1,4 @@
-package com.ProjectManagmentSystem.ConnectionToDb;
+package com.ProjectManagmentSystem.connectiontodb;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,10 +8,10 @@ import java.sql.SQLException;
  * Created by pc on 20.06.2017.
  */
 public class UtilConnection {
-    String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    String DATABASE_URL = "jdbc:mysql://localhost:3306/homework_db?useSSL=true";
-    String USER = "root";
-    String PASSWORD = "root";
+    private final static String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+    private final static String DATABASE_URL = "jdbc:mysql://localhost:3306/homework_db?useSSL=true";
+    private final static String USER = "root";
+    private final static String PASSWORD = "root";
 
     public Connection getConnection() {
         Connection connection = null;

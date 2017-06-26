@@ -1,8 +1,10 @@
 package com.ProjectManagmentSystem;
 
-import com.ProjectManagmentSystem.Service.DeveloperService;
-import com.ProjectManagmentSystem.Service.ProjectService;
-import com.ProjectManagmentSystem.Service.Projects_has_developersService;
+import com.ProjectManagmentSystem.service.DeveloperService;
+import com.ProjectManagmentSystem.service.ProjectService;
+import com.ProjectManagmentSystem.service.Projects_has_developersService;
+import com.ProjectManagmentSystem.pojo.Developers;
+import com.ProjectManagmentSystem.pojo.Projects;
 
 import java.sql.SQLException;
 

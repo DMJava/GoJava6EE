@@ -1,6 +1,6 @@
-package com.ProjectManagmentSystem.DAO;
+package com.ProjectManagmentSystem.dao;
 
-import com.ProjectManagmentSystem.Projects;
+import com.ProjectManagmentSystem.pojo.Projects;
 
 import java.sql.SQLException;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.ProjectManagmentSystem;
+package com.ProjectManagmentSystem.pojo;
 
 import java.util.List;
 

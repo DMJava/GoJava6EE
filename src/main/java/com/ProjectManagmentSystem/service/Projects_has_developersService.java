@@ -1,7 +1,7 @@
-package com.ProjectManagmentSystem.Service;
+package com.ProjectManagmentSystem.service;
 
-import com.ProjectManagmentSystem.ConnectionToDb.UtilConnection;
-import com.ProjectManagmentSystem.DAO.Projects_has_developersDAO;
+import com.ProjectManagmentSystem.connectiontodb.UtilConnection;
+import com.ProjectManagmentSystem.dao.Projects_has_developersDAO;
 import com.ProjectManagmentSystem.Projects_has_developers;
 
 import java.sql.*;

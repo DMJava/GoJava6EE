@@ -1,4 +1,4 @@
-package com.ProjectManagmentSystem.DAO;
+package com.ProjectManagmentSystem.dao;
 
 import com.ProjectManagmentSystem.Projects_has_developers;
 
